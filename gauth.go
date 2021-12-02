@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"github.com/gcstang/gauth/gauth"
 	"log"
 	"os"
 	"os/user"
@@ -9,7 +10,6 @@ import (
 	"syscall"
 	"text/tabwriter"
 
-	"github.com/pcarrier/gauth/gauth"
 	"golang.org/x/term"
 )
 

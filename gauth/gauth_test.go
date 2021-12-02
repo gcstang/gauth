@@ -4,7 +4,7 @@ import (
 	"bytes"
 	"testing"
 
-	"github.com/pcarrier/gauth/gauth"
+	"github.com/gcstang/gauth/gauth"
 )
 
 /* TODO: Update this test.
