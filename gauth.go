@@ -6,12 +6,11 @@ import (
 	"os"
 	"os/user"
 	"path"
-	"strings"
 	"syscall"
 	"text/tabwriter"
 
 	"github.com/pcarrier/gauth/gauth"
-	"golang.org/x/crypto/ssh/terminal"
+	"golang.org/x/term"
 )
 
 func main() {
@@ -34,7 +33,7 @@ func main() {
 		log.Fatalf("Decoding configuration file: %v", err)
 	}
 
-	_, progress := gauth.IndexNow() // TODO: do this per-code
+	_, progress := gauth.IndexNow()
 
 	tw := tabwriter.NewWriter(os.Stdout, 0, 8, 1, ' ', 0)
 	fmt.Fprintln(tw, "\tprev\tcurr\tnext")
@@ -46,11 +45,12 @@ func main() {
 		fmt.Fprintf(tw, "%s\t%s\t%s\t%s\n", url.Account, prev, curr, next)
 	}
 	tw.Flush()
-	fmt.Printf("[%-29s]\n", strings.Repeat("=", progress))
+	fmt.Printf("timeleft (seconds): %d\n", (30 - progress))
+	//fmt.Printf("[%-29s]\n", strings.Repeat("=", progress))
 }
 
 func getPassword() ([]byte, error) {
 	fmt.Printf("Encryption password: ")
 	defer fmt.Println()
-	return terminal.ReadPassword(int(syscall.Stdin))
+	return term.ReadPassword(int(syscall.Stdin))
 }
